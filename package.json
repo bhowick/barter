@@ -1,0 +1,37 @@
+{
+  "name": "barter",
+  "version": "0.0.0",
+  "description": "A flexible market/trading system.",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "~2.3.4",
+    "express": "~4.13.3",
+    "body-parser": "~1.13.3",
+    "sqlite3": "~3.0.10",
+    "validator": "~4.0.5",
+    "passport": "~0.3.0",
+    "passport-local": "~1.0.0",
+    "cookieparser": "~0.1.0",
+    "express-session": "~1.11.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bhowick/barter.git"
+  },
+  "keywords": [
+    "market",
+    "trade",
+    "barter",
+    "shop",
+    "store"
+  ],
+  "author": "B. Howick",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/bhowick/barter/issues"
+  }
+}
