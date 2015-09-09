@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Log In - barter</title>
+		<link rel="stylesheet" type="text/css" href="/css/barter.css">
+	</head>
+	<body>
+	<% if(!userID){ %>
+		<h1>Logging In</h1>
+		<form action="/login" METHOD="POST">
+			<div>
+				<label><strong>Username</strong></label>:
+				<input type="text" name="username" placeholder="Enter your username here.">
+				<br>
+				<label><strong>Password</strong></label>:
+				<input type="password" name="password" placeholder="Enter your password here.">
+				<br>
+				<input type="submit" value="Log In">
+			</div>
+		</form>
+	<%} 
+	else { %>
+		<h1>Whoops!</h1>
+		<div>
+			<p>Looks like you're already logged in. <a href="/">Click here</a> to return to the index page.</p>
+		</div>
+	<% } %>
+	</body>
+</html>

@@ -33,6 +33,8 @@ var LocalStrategy = require('passport-local').Strategy;
 
 //Files we create to externalize page handling will go here.
 var indexHandler = require('./lib/indexHandler.js');
+var registerHandler = require('./lib/registerHandler.js');
+var globalTokens = require('./lib/globalTokens.js');
 
 /*=============================
 MIDDLEWARE
@@ -52,10 +54,48 @@ app.use(passport.initialize()); //Initializes passport.
 app.use(passport.session()); //Sessions (passport).
 
 //Externalized (Globalized) variables and functions will go here. 
-/*PLACEHOLDER COMMENT*/
+app.use(globalTokens);
+app.use(function (req,res,next) {
+	req.db = db;
+	next();
+});
 
-//Passport LocalStrategy will go here.
-/*PLACEHOLDER COMMENT*/
+//Passport LocalStrategy -- Borrowed from Testing, for now. :P
+passport.use(new LocalStrategy(
+	function(username, password, done) {
+		db.get('SELECT * FROM users WHERE name = ?', username, function(err,user) { //"user" is the row itself.
+			if(err) { //If the query errors out.
+				return done(err);
+			}
+			if(!user) { //If the user doesn't exist.
+				return done(null, false, { message: 'Username not found.' });
+			}
+			//Crypto stuff time.
+			var iter = 1000; //Number of hash iterations. Apparently 1000 is recommended. Might also be unnecessary.
+			var hashLength = 64; //How long you want the hash to be (bytes).
+			var hashType = 'sha256'; //The type of hash to be used.
+			var hashedKey = crypto.pbkdf2Sync(password, user.salt, iter, hashLength, hashType); //The actual hashing... thing. Makes raw bytes.
+			var hashedPassword = hashedKey.toString('hex');//Takes the bytes and makes a nice string out of them.
+			
+			if(!user.pass || user.pass != hashedPassword) { //If the user's password is empty or doesn't exist.
+				return done(null, false, { message: 'Incorrect password.' });
+			}
+			var d = new Date();
+			var timeStamp = Math.floor(d.getTime()/1000); //We want a workable date in Unix timestamp seconds.
+			var newQuery = [timeStamp, user.userID]; //The array to put into the query to update it.
+
+			db.run('UPDATE users SET lastLogin = ? WHERE userID = ?', newQuery, function(err) {
+				if(err) {
+					return done(err);
+				}
+				console.log('The user"' + user.name + '" has logged in successfully.');
+			});
+			var userID = user.userID;
+			return done(null, userID); //Returns the user ID as an object if everything checks out.
+		});
+
+	}
+));
 
 //Passport Serialization
 passport.serializeUser(function (user,done) {
@@ -73,11 +113,30 @@ app.use(express.static(__dirname + '/views/'));
 GET (app.get)
 =============================*/
 app.get('/', indexHandler.GET);
+app.get('/login', function (req,res) {
+	res.render('pages/login');
+});
+app.get('/loginFailure', function(req,res) {
+	console.log('Failed to authenticate user.');
+	res.redirect('/login');
+});
+app.get('/loginSuccess', function(req,res) {
+	console.log('Successfully authenticated user.');
+	res.redirect('/');
+});
+app.get('/register', registerHandler.GET);
+
 
 /*=============================
 POST (app.post)
 =============================*/
 app.post('/',indexHandler.POST);
+app.post('/login', passport.authenticate('local', {
+	successRedirect: '/loginSuccess',
+	failureRedirect: '/loginFailure'
+}));
+app.post('/register', registerHandler.POST);
+
 
 /*=============================
 LISTENING (localhost:3000)

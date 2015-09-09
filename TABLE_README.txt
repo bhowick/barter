@@ -3,6 +3,15 @@
 //$ = Primary Key
 
 /*=======================================================================================
+ADMINISTRATORS (administrators)
+The users designated as admins
+[adminID | userID]
+=======================================================================================*/
+$[adminID]: The admin's ID number. Not a userID. Unique, auto-generated. (INTEGER)
+[userID]: The admin's userID. Unique. (INTEGER)
+
+
+/*=======================================================================================
 CATEGORIES (categories)
 Information about item shop categories
 [categoryID | name | img]
@@ -119,13 +128,14 @@ Contents of users' inventories
 /*=======================================================================================
 USERS (users)
 Information about all individual users
-[userID | name | pass | isAdmin | rank | balance | salt]
+[userID | name | pass | rankID | balance | salt | timeCreated | lastLogin]
 =======================================================================================*/
 $[userID]: The ID of the user. Unique, auto-generated. (INTEGER)
 [name]: The user's name. Unique. (VARCHAR)
 [pass]: A hash of the user's password. (VARCHAR)
-[isAdmin]: Is the user an administrator? (Yes: true || No: false) (BOOLEAN)
 [rankID]: The ID of the user's rank. (INTEGER)
 [balance]: The amount of server currency the user possesses. (INTEGER)
 [salt]: Salt. Literally random nonsense. (VARCHAR)
+[timeCreated]: The timestamp of when the account was created. (INTEGER)
+[lastLogin]: The timestamp of when the account last logged into the server. (INTEGER)
 

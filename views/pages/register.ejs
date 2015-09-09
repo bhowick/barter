@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Register - barter</title>
+		<link rel="stylesheet" type="text/css" href="/css/barter.css">
+	</head>
+	<body>
+		<% if(!userID) { %>
+			<h1>Create Account</h1>
+			<% if(regStatus) { %>
+				<div>
+					<strong>Registration failed</strong>: <em><%= regStatus %></em>
+				</div><br>
+			<% } %>
+			<form action="/register" METHOD="POST">
+				<div>
+					<label><strong>Desired Username:</strong></label>
+					<input type="text" name="username" placeholder="Enter desired username here." autofocus>
+					<br>
+					<label><strong>Desired Password:</strong></label>
+					<input type="password" name="password" placeholder="Enter desired password here.">
+					<br>
+					<label><strong>Confirm Password:</strong></label>
+					<input type="password" name="passConfirm" placeholder="Confirm your password.">
+					<br>
+					<input type="submit" value="Register">
+				</div>
+			</form>
+		<% } 
+		else { %>
+			<h1>You are already logged in.</h1>
+		<% } %>
+		<p><a href="/">Click here</a> to return to the index page.</p>
+	</body>
+</html>
