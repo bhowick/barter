@@ -32,7 +32,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 
 //Files we create to externalize page handling will go here.
-/*PLACEHOLDER COMMENT*/
+var indexHandler = require('./lib/indexHandler.js');
 
 /*=============================
 MIDDLEWARE
@@ -72,12 +72,12 @@ app.use(express.static(__dirname + '/views/'));
 /*=============================
 GET (app.get)
 =============================*/
-
+app.get('/', indexHandler.GET);
 
 /*=============================
 POST (app.post)
 =============================*/
-
+app.post('/',indexHandler.POST);
 
 /*=============================
 LISTENING (localhost:3000)
