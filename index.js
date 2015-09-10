@@ -6,9 +6,9 @@ GOAL: Design a flexible shop/store system for virtual items.
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 
 
-/*=============================
+/*=======================================================================================
 REQUIRES
-=============================*/
+=======================================================================================*/
 
 //For making coding easier
 var express = require('express');
@@ -36,9 +36,9 @@ var indexHandler = require('./lib/indexHandler.js');
 var registerHandler = require('./lib/registerHandler.js');
 var globalTokens = require('./lib/globalTokens.js');
 
-/*=============================
+/*=======================================================================================
 MIDDLEWARE
-=============================*/
+=======================================================================================*/
 
 //Using Express as "app"
 var app = express();
@@ -109,10 +109,23 @@ passport.deserializeUser(function (user,done) {
 app.use(express.static(__dirname + '/views/'));
 
 
-/*=============================
+/*=======================================================================================
 GET (app.get)
-=============================*/
+=======================================================================================*/
 app.get('/', indexHandler.GET);
+app.get('/register', registerHandler.GET);
+
+
+/*=======================================================================================
+POST (app.post)
+=======================================================================================*/
+app.post('/',indexHandler.POST);
+app.post('/register', registerHandler.POST);
+
+
+/*=======================================================================================
+LOGINS (app.get, app.post)
+=======================================================================================*/
 app.get('/login', function (req,res) {
 	res.render('pages/login');
 });
@@ -124,22 +137,14 @@ app.get('/loginSuccess', function(req,res) {
 	console.log('Successfully authenticated user.');
 	res.redirect('/');
 });
-app.get('/register', registerHandler.GET);
-
-
-/*=============================
-POST (app.post)
-=============================*/
-app.post('/',indexHandler.POST);
 app.post('/login', passport.authenticate('local', {
 	successRedirect: '/loginSuccess',
 	failureRedirect: '/loginFailure'
 }));
-app.post('/register', registerHandler.POST);
 
 
-/*=============================
+/*=======================================================================================
 LISTENING (localhost:3000)
-=============================*/
+=======================================================================================*/
 app.listen(3000);
 console.log('Server functional. Please use http://localhost:3000/ to access pages.');

@@ -6,6 +6,11 @@
 		<link rel="stylesheet" type="text/css" href="css/barter.css">
 	</head>
 	<body>
+		<% if (user) { %>
+			<div style="position:fixed; display:inline-block; top:0px; right:0px;">
+				Welcome, <%= username %>!
+			</div>
+		<% } %>
 		<h1>Welcome to the index!</h1>
 		<div>
 			<p>For now, this page is just a placeholder.<br>
