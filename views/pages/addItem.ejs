@@ -7,6 +7,11 @@
 	</head>
 	<body>
 		<h1>Add an item to the database!</h1>
+	<% if(addedItem) { %>
+		<div>
+			"<%= addedItem %>" has been added to the database.
+		</div>
+	<% } %>
 		<form action="/addItem" METHOD="POST">
 			<div>
 				<label>Item Name: </label>
@@ -59,6 +64,7 @@
 			</div>
 		</form>
 		<div>
+			<p><a href="/viewAll">Click here</a> to return to viewing all items.</p>
 			<p><a href="/">Click here</a> to return to the index page!</p>
 		</div>
 	</body>

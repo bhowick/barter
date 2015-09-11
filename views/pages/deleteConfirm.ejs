@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Deleting An Item - barter</title>
+		<link rel="stylesheet" type="text/css" href="css/barter.css">
+	</head>
+	<body>
+		<h1>Confirm Deletion of <%= item.name %> (ID#<%= item.itemID %>)</h1>
+		<div>
+			<table>
+				<tr>
+					<th>ID#</th>
+					<th>Name</th>
+					<th>Image</th>
+					<th>Description</th>
+					<th>Rarity</th>
+					<th>Category</th>
+					<th>Function</th>
+					<th>Max Stack</th>
+					<th>Tradeable?</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				<tr>
+					<td><%= item.itemID %></td>
+					<td><%= item.name %></td>
+					<td><img src="/images/<%= item.img %>"></td>
+					<td><%= item.desc %></td>
+					<td><%= item.rarityID %></td>
+					<td><%= item.categoryID %></td>
+					<td><%= item.functionID %></td>
+					<td><%= item.maxStack %></td>
+				<% if(item.canTrade) { %>
+					<td>Yes</td>
+				<% }
+				else { %>
+					<td>No</td>
+				<% } %>
+					<td><a href="/editItem?id=<%= item.itemID %>">Edit</a></td>
+					<td><a href="/deleteConfirm?id=<%= item.itemID %>">Delete</a></td>
+				</tr>
+			</table>
+			<form action="/deleteConfirm" METHOD="POST">
+				<input type="hidden" name="itemID" value="<%= item.itemID %>" readonly>
+				<input type="hidden" name="name" value="<%= item.name %>" readonly>
+				<label>Are you sure you want to delete this item?</label>
+				<br>
+				<input type="radio" name="confirm" value="true">Yes
+				<input type="radio" name="confirm" value="false" checked>No
+				<br>
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+	</body>
+</html>
