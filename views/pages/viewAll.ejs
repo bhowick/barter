@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>All Items - barter</title>
+		<link rel="stylesheet" type="text/css" href="css/barter.css">
+	</head>
+	<body>
+		<h1>Items</h1>
+		<div>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Details</th>
+				</tr>
+				<% items.forEach(function (item) { %>
+					<tr>
+						<td><%= item.name %></td>
+						<% if(item.desc.Length < 60) { %>
+							<td><%= item.desc %></td>
+						<% } 
+						else { 
+							var itemdesc = item.desc.substring(0,56) + '...';%>
+							<td><%= itemdesc %></td>
+						<% } %>
+						<td><a href="/viewItem?id=<%= item.itemID %>">Details</a></td>
+					</tr>
+				<% }); %>
+			</table>
+		</div>
+		<div>
+			<p><a href="/">Click Here</a> to return to the index page.</p>
+		</div>
+	</body>
+</html>

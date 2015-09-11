@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Viewing Item Information - barter</title>
+		<link rel="stylesheet" type="text/css" href="css/barter.css">
+	</head>
+	<body>
+		<div>
+			<table>
+				<tr>
+					<th>ID#</th>
+					<th>Name</th>
+					<th>Image</th>
+					<th>Description</th>
+					<th>Rarity</th>
+					<th>Category</th>
+					<th>Function</th>
+					<th>Max Stack</th>
+					<th>Tradeable?</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				<tr>
+					<td><%= item.itemID %></td>
+					<td><%= item.name %></td>
+					<td><img src="/images/<%= item.img %>"></td>
+					<td><%= item.desc %></td>
+					<td><%= item.rarityID %></td>
+					<td><%= item.categoryID %></td>
+					<td><%= item.functionID %></td>
+					<td><%= item.maxStack %></td>
+				<% if(item.canTrade) { %>
+					<td>Yes</td>
+				<% }
+				else { %>
+					<td>No</td>
+				<% } %>
+					<td><a href="/editItem?id=<%= item.itemID %>">Edit</a></td>
+					<td><a href="/deleteConfirm?id=<%= item.itemID %>">Delete</a></td>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<p><a href="/viewAll">Click here</a> to return to viewing all items.</p>
+		</div>
+	</body>
+</html>

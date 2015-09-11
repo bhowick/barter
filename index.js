@@ -34,6 +34,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var indexHandler = require('./lib/indexHandler.js');
 var registerHandler = require('./lib/registerHandler.js');
 var addItemHandler = require('./lib/addItemHandler.js');
+var viewAllHandler = require('./lib/viewAllHandler.js');
+var viewItemHandler = require('./lib/viewItemHandler.js');
 var globalTokens = require('./lib/globalTokens.js');
 
 /*=======================================================================================
@@ -115,7 +117,8 @@ GET (app.get)
 app.get('/', indexHandler.GET);
 app.get('/register', registerHandler.GET);
 app.get('/addItem', addItemHandler.GET);
-
+app.get('/viewAll', viewAllHandler.GET);
+app.get('/viewItem', viewItemHandler.GET);
 
 /*=======================================================================================
 POST (app.post)
@@ -123,6 +126,8 @@ POST (app.post)
 app.post('/',indexHandler.POST);
 app.post('/register', registerHandler.POST);
 app.post('/addItem', addItemHandler.POST);
+app.post('/viewAll', viewAllHandler.POST);
+app.post('/viewItem', viewItemHandler.POST);
 
 
 /*=======================================================================================
