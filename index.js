@@ -30,10 +30,10 @@ var passport = require('passport');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
 
-
 //Files we create to externalize page handling will go here.
 var indexHandler = require('./lib/indexHandler.js');
 var registerHandler = require('./lib/registerHandler.js');
+var addItemHandler = require('./lib/addItemHandler.js');
 var globalTokens = require('./lib/globalTokens.js');
 
 /*=======================================================================================
@@ -114,6 +114,7 @@ GET (app.get)
 =======================================================================================*/
 app.get('/', indexHandler.GET);
 app.get('/register', registerHandler.GET);
+app.get('/addItem', addItemHandler.GET);
 
 
 /*=======================================================================================
@@ -121,6 +122,7 @@ POST (app.post)
 =======================================================================================*/
 app.post('/',indexHandler.POST);
 app.post('/register', registerHandler.POST);
+app.post('/addItem', addItemHandler.POST);
 
 
 /*=======================================================================================

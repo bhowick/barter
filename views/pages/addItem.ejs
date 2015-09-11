@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Add New Item - barter</title>
+		<link rel="stylesheet" type="text/css" href="css/barter.css">
+	</head>
+	<body>
+		<h1>Add an item to the database!</h1>
+		<form action="/addItem" METHOD="POST">
+			<div>
+				<label>Item Name: </label>
+				<input type="text" name="name" placeholder="Enter the item's name here.">
+				<br>
+				<label>Item Description: </label><br>
+				<textarea name="desc" rows="10" cols="32">Enter the item's description here.</textarea>
+				<br>
+				<label>Item Image: </label> 
+				<select name="img">
+					<!-- List of all images in the directory. -->
+					<% images.forEach(function (image) { %>
+						<option value="<%= image %>"><%= image %></option>
+					<% }); %>
+				</select>
+				<br>
+				<label>Item Rarity: </label>
+				<select name="rarityID">
+					<!-- List of all rarities in the database. -->
+					<% rarities.forEach(function (rarity) { %>
+						<option value="<%= rarity.rarityID %>"><%= rarity.name %></option>
+					<% }); %>
+
+				</select>
+				<br>
+				<label>Item Category: </label>
+				<select name="categoryID">
+					<!-- List of all categories in the database. -->
+					<% categories.forEach(function (category) { %>
+						<option value="<%= category.categoryID %>"><%= category.name %></option>
+					<% }); %>
+				</select>
+				<br>
+				<label>Item Function: </label>
+				<select name="functionID">
+					<!-- List of all item functions in the database. -->
+					<% itemFunctions.forEach(function (itemFunction) { %>
+						<option value="<%= itemFunction.functionID %>"><%= itemFunction.name %></option>
+					<% }); %>
+				</select>
+				<br>
+				<label>Max Stack Amount: </label>
+				<input type="number" min="1" name="maxStack" placeholder="Enter Max Stack">
+				<br>
+				<label>Will It Be Tradeable?: </label>
+				<input type="radio" name="canTrade" value="true">Yes
+				<input type="radio" name="canTrade" value="false">No
+				<br>
+				<input type="submit" value="Add This Item!">
+			</div>
+		</form>
+		<div>
+			<p><a href="/">Click here</a> to return to the index page!</p>
+		</div>
+	</body>
+</html>
