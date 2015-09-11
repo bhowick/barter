@@ -36,6 +36,9 @@ var registerHandler = require('./lib/registerHandler.js');
 var addItemHandler = require('./lib/addItemHandler.js');
 var viewAllHandler = require('./lib/viewAllHandler.js');
 var viewItemHandler = require('./lib/viewItemHandler.js');
+var editItemHandler = require('./lib/editItemHandler.js');
+//var deleteConfirmHandler = require('./lib/deleteConfirmHandler.js');
+//var deleteItemHandler = require('./lib/deleteItemHandler.js');
 var globalTokens = require('./lib/globalTokens.js');
 
 /*=======================================================================================
@@ -119,6 +122,10 @@ app.get('/register', registerHandler.GET);
 app.get('/addItem', addItemHandler.GET);
 app.get('/viewAll', viewAllHandler.GET);
 app.get('/viewItem', viewItemHandler.GET);
+app.get('/editItem', editItemHandler.GET);
+//app.get('/deleteConfirm', deleteConfirmHandler.GET);
+//app.get('/deleteItem', deleteItemHandler.GET);
+
 
 /*=======================================================================================
 POST (app.post)
@@ -128,6 +135,9 @@ app.post('/register', registerHandler.POST);
 app.post('/addItem', addItemHandler.POST);
 app.post('/viewAll', viewAllHandler.POST);
 app.post('/viewItem', viewItemHandler.POST);
+app.post('/editItem', editItemHandler.POST);
+//app.post('/deleteConfirm', deleteConfirmHandler.POST);
+//app.post('/deleteItem', deleteItemHandler.POST);
 
 
 /*=======================================================================================
