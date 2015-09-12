@@ -38,6 +38,9 @@ var viewAllHandler = require('./lib/viewAllHandler.js');
 var viewItemHandler = require('./lib/viewItemHandler.js');
 var editItemHandler = require('./lib/editItemHandler.js');
 var deleteConfirmHandler = require('./lib/deleteConfirmHandler.js');
+var inventoryHandler = require('./lib/inventoryHandler.js');
+
+//Global Tokens
 var globalTokens = require('./lib/globalTokens.js');
 
 /*=======================================================================================
@@ -95,7 +98,12 @@ passport.use(new LocalStrategy(
 				console.log('The user"' + user.name + '" has logged in successfully.');
 			});
 			var userID = user.userID;
-			return done(null, userID); //Returns the user ID as an object if everything checks out.
+			var isAdmin = user.isAdmin;
+			var thisUser = {
+				userID:userID,
+				isAdmin:isAdmin
+			};
+			return done(null, thisUser); //Returns the user ID as an object if everything checks out.
 		});
 
 	}
@@ -123,6 +131,7 @@ app.get('/viewAll', viewAllHandler.GET);
 app.get('/viewItem', viewItemHandler.GET);
 app.get('/editItem', editItemHandler.GET);
 app.get('/deleteConfirm', deleteConfirmHandler.GET);
+app.get('/inventory', inventoryHandler.GET);
 
 
 /*=======================================================================================
@@ -135,10 +144,11 @@ app.post('/viewAll', viewAllHandler.POST);
 app.post('/viewItem', viewItemHandler.POST);
 app.post('/editItem', editItemHandler.POST);
 app.post('/deleteConfirm', deleteConfirmHandler.POST);
+app.post('/inventory', inventoryHandler.POST);
 
 
 /*=======================================================================================
-LOGINS (app.get, app.post)
+SESSIONS (log in, log out) (app.get, app.post)
 =======================================================================================*/
 app.get('/login', function (req,res) {
 	res.render('pages/login');
@@ -155,7 +165,10 @@ app.post('/login', passport.authenticate('local', {
 	successRedirect: '/loginSuccess',
 	failureRedirect: '/loginFailure'
 }));
-
+app.get('/logout', function (req,res) {
+	req.logout();
+	res.redirect('/');
+});
 
 /*=======================================================================================
 LISTENING (localhost:3000)

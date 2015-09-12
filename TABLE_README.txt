@@ -112,8 +112,9 @@ $[transactionID]: The ID of the transaction. Unique, auto-generated. (INTEGER)
 /*=======================================================================================
 USER INVENTORIES (userInventories)
 Contents of users' inventories
-[userID | itemID | quantity]
+[instanceID | userID | itemID | quantity]
 =======================================================================================*/
+$[instanceID]: The instance ID of the inventory entry. Unique, auto-generated. (INTEGER)
 [userID]: The ID of the user that owns the item(s). (INTEGER)
 [itemID]: The ID of one of the owned items. (INTEGER)
 [quantity]: The amount of the item owned by the user. (INTEGER)
@@ -128,7 +129,7 @@ Contents of users' inventories
 /*=======================================================================================
 USERS (users)
 Information about all individual users
-[userID | name | pass | rankID | balance | salt | timeCreated | lastLogin]
+[userID | name | pass | rankID | balance | salt | timeCreated | lastLogin | isAdmin]
 =======================================================================================*/
 $[userID]: The ID of the user. Unique, auto-generated. (INTEGER)
 [name]: The user's name. Unique. (VARCHAR)
@@ -138,4 +139,5 @@ $[userID]: The ID of the user. Unique, auto-generated. (INTEGER)
 [salt]: Salt. Literally random nonsense. (VARCHAR)
 [timeCreated]: The timestamp of when the account was created. (INTEGER)
 [lastLogin]: The timestamp of when the account last logged into the server. (INTEGER)
+[isAdmin]: Whether or not the user is an admin. (BOOL)
 

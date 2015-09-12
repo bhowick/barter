@@ -8,7 +8,11 @@
 	<body>
 		<% if (user) { %>
 			<div style="position:fixed; display:inline-block; top:0px; right:0px;">
-				Welcome, <%= username %>!
+				Welcome, <%= username %>! | <a href="/inventory">Inventory</a> | <a href="/logout">Log Out</a>
+			<% if(isAdmin) { %>
+				<br>
+				<a href="/admin">Admin Control Panel</a>
+				<% } %>
 			</div>
 		<% } %>
 		<h1>Welcome to the index!</h1>
@@ -22,6 +26,7 @@
 				<li><a href="/register">Register</a></li>
 				<li><a href="/addItem">Add Item</a></li>
 				<li><a href="/viewAll">View All Items</a></li>
+				<li><a href="/inventory">Inventory</a></li>
 			</ul>
 	</body>
 </html>

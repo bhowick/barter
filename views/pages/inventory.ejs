@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Viewing Your Inventory - barter</title>
+		<link rel="stylesheet" type="text/css" href="css/barter.css">
+	</head>
+	<body>
+
+		<h1>Your Inventory</h1>
+		<div>
+			<table>
+				<tr>
+					<th></th>
+					<th>Item Name</th>
+					<th>Quantity</th>
+					<th>Description</th>
+					<th>Rarity</th>
+					<th>Category</th>
+					<th>Function</th>
+				</tr>
+			<% if(!items) { %>
+				<tr>
+					<td colspan="8">Looks like you don't have any items in your inventory right now!</td>
+				</tr>
+			<% }
+			else {
+				items.forEach(function (item) { %>
+				<tr>
+					<td><img src="images/<%= item.img %>"></td>
+					<td style="color:<%= item.color %>"><%= item.name %></td>
+					<td><%= item.quantity %></td>
+					<td><%= item.desc %></td>
+					<td style="color:<%= item.color %>"><%= item.rarity %></td>
+					<td><%= item.category %></td>
+					<td><%= item.fName %></td>
+				</tr>
+				<% }); 
+			} %>
+			</table>
+		</div>
+		<div>
+			<p><a href="/">Click here</a> to return to the index page.</p>
+		</div>
+	</body>
+</html>
