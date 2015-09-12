@@ -10,6 +10,12 @@
 		<h1>Your Inventory</h1>
 		<div>
 			<table>
+			<% if(items.length === 0) { %>
+				<tr>
+					<th colspan="8">Looks like you don't have any items in your inventory right now!</th>
+				</tr>
+			<% }
+			else { %>
 				<tr>
 					<th></th>
 					<th>Item Name</th>
@@ -19,13 +25,8 @@
 					<th>Category</th>
 					<th>Function</th>
 				</tr>
-			<% if(!items) { %>
-				<tr>
-					<td colspan="8">Looks like you don't have any items in your inventory right now!</td>
-				</tr>
-			<% }
-			else {
-				items.forEach(function (item) { %>
+
+				<% items.forEach(function (item) { %>
 				<tr>
 					<td><img src="images/<%= item.img %>"></td>
 					<td style="color:<%= item.color %>"><%= item.name %></td>
