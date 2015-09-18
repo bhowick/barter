@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Adding to the Shop - barter</title>
+		<link rel="stylesheet" type="text/css" href="css/barter.css">
+	</head>
+	<body>
+		<h1>Add An Item to the Shop!</h1>
+	<% if(msgText) { %>
+		<div id="msg">
+			<%= msgText %>
+		</div>
+	<% } %>
+		<form action="/addToShop" METHOD="POST">
+			<div>
+				<label>Item to Sell: </label>
+				<select name="itemID" required>
+					<option value="0" selected>Select An Item</option>
+				<% items.forEach( function(item) { %>
+					<option value="<%= item.itemID %>"><%= item.name %></option>
+				<% }); %>
+				</select>
+				<br>
+
+				<label>Initial Stock:</label>
+				<input type="number" name="quantity" min="-1" value="0" required>
+				<em>(Enter -1 for infinite stock.)</em>
+				<br>
+
+				<label>Cost (Currency):</label>
+				<input type="number" name="balCost" min="0" value="0">
+				<br>
+
+				<label>Will other items be used to pay for this one?</label>
+				<input type="radio" name="costsItems" value="true">Yes
+				<input type="radio" name="costsItems" value="false" checked>No
+				<br>
+				<div id="ICContainer">
+				<!-- Item Cost Container Div -->
+				<hr>
+				<p>Item Costs</p>
+				<% for (i=1;i<=8;i++) { %>
+					<label>Item Cost (#<%= i %>): </label>
+					<select name="costIDs">
+						<option value="0" selected>Select An Item</option>
+					<% items.forEach( function(item) { %>
+						<option value="<%= item.itemID %>"><%= item.name %></option>
+					<% });%>
+					</select>
+					<label>Quantity (#<%= i %>): </label>
+					<input type="number" name="costQuantities" min="0" value="0">
+					<br>
+				<% }; %>
+				</div>
+				<input type="submit" value="Add to Shop">
+			</div>
+		</form>
+		<div>
+			<p><a href="/shop">Click here</a> to view the shop.</p>
+			<p><a href="/">Click here</a> to return to the index page.</p>
+		</div>
+	</body>
+</html>

@@ -39,6 +39,7 @@ var viewItemHandler = require('./lib/viewItemHandler.js');
 var editItemHandler = require('./lib/editItemHandler.js');
 var deleteConfirmHandler = require('./lib/deleteConfirmHandler.js');
 var inventoryHandler = require('./lib/inventoryHandler.js');
+var addToShopHandler = require('./lib/addToShopHandler.js');
 
 //Global Tokens
 var globalTokens = require('./lib/globalTokens.js');
@@ -132,6 +133,7 @@ app.get('/viewItem', viewItemHandler.GET);
 app.get('/editItem', editItemHandler.GET);
 app.get('/deleteConfirm', deleteConfirmHandler.GET);
 app.get('/inventory', inventoryHandler.GET);
+app.get('/addToShop', addToShopHandler.GET);
 
 
 /*=======================================================================================
@@ -145,6 +147,7 @@ app.post('/viewItem', viewItemHandler.POST);
 app.post('/editItem', editItemHandler.POST);
 app.post('/deleteConfirm', deleteConfirmHandler.POST);
 app.post('/inventory', inventoryHandler.POST);
+app.post('/addToShop', addToShopHandler.POST);
 
 
 /*=======================================================================================

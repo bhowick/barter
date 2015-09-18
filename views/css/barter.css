@@ -3,3 +3,11 @@ a {
 	color:orange;
 }
 
+.hidden {
+	display:none;
+}
+
+
+.visible {
+	display:block;
+}
