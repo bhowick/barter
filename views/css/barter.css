@@ -11,3 +11,8 @@ a {
 .visible {
 	display:block;
 }
+
+.cost {
+	display:inline-block;
+	background-color:#88cc88;
+}

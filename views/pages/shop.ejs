@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Shopping for Items - barter</title>
+		<link rel="stylesheet" type="text/css" href="css/barter.css">
+	</head>
+	<body>
+		<h1>Welcome to the Server Shop!</h1>
+		<p>Please feel free to browse.</p>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th><!-- Placeholder for Item Image --></th>
+						<th>Item</th>
+						<th>Description</th>
+						<th>Function</th>
+						<th>In Stock</th>
+						<th>Cost</th>
+						<th><!--TODO: Buying items --></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% items.forEach(function (item) { %>
+					<tr>
+						<td><img src="/images/<%= item.img %>"></td>
+						<td><%= item.name %></td>
+						<td><%= item.desc %></td>
+						<td><%= item.fName %></td>
+						<td>
+						<% if (item.quantity >= 0) { %>
+							<%= item.quantity %>
+						<% }
+						else { %>
+							&infin;
+						<% } %>
+						</td>
+						<td>
+							<div class="cost">
+								[$] x <%= item.balCost %>
+							</div>
+					<% if(item.costsItems) { 
+						itemCosts.forEach(function (costItem) { 
+							if (costItem.itemID === item.itemID) { %>
+							<div class="cost">
+								<img title="<%= costItem.name %>" src="/images/<%= costItem.img %>"> x <%= costItem.quantity %>
+							</div>
+							<% }
+						});
+					} %>
+						</td>
+						<td><!-- TODO: Buying Items --></td>
+					</tr>
+				<% }); %>
+		</div>
+	</body>
+</html>
