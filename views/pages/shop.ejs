@@ -18,6 +18,7 @@
 						<th>Function</th>
 						<th>In Stock</th>
 						<th>Cost</th>
+						<th>Edit</th>
 						<th><!--TODO: Buying items --></th>
 					</tr>
 				</thead>
@@ -50,9 +51,15 @@
 						});
 					} %>
 						</td>
+						<td><a href="/editShopItem?stockID=<%= item.stockID %>">Edit</a></td>
 						<td><!-- TODO: Buying Items --></td>
 					</tr>
 				<% }); %>
+		</div>
+		<div>
+			<!-- Why would this appear above the table??? -->
+			<p><a href="/addToShop">Click here</a> to add an item to the shop.</p>
+			<p><a href="/">Click here</a> to return to the index page.</p>
 		</div>
 	</body>
 </html>

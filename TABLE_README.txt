@@ -71,14 +71,14 @@ SHOP COSTS (shopCosts)
 Information about the costs of shop items (when they cost other items, not only currency)
 [itemID | costID | quantity]
 =======================================================================================*/
-[itemID]: The ID of the item up for sale in the shop. (INTEGER)
+[itemID]: The ID of the particular item up for sale in the shop. (INTEGER)
 [costID]: The ID of an item used as payment for the one for sale. (INTEGER)
 [quantity]: The quantity of the above item being used as payment. (INTEGER)
 //NOTE: This table can contain duplicate rows of the same item ID.
 //EXAMPLE
 //[10 | 1 | 7]
 //[10 | 3 | 6]
-//Item#10 costs [Item#1]x7 and [Item#3]x6.
+//ItemID#10 costs [Item#1]x7 and [Item#3]x6.
 
 
 /*=======================================================================================

@@ -1,0 +1,75 @@
+<!DOCTYPE html> 
+
+<html>
+	<head>
+		<title>Editing A Shop Item - barter</title>
+		<link rel="stylesheet" type="text/css" href="css/barter.css">
+	</head>
+	<body>
+		<h1>Now Editing <%=item.name%>(Stock ID#<%=item.stockID%>)</h1>
+		<form action="/editShopItem" METHOD="POST">
+			<div>
+				<!--Item Stock -->
+				<label>Stock: </label>
+				<input type="number" name="quantity" value="<%=item.quantity%>" min="-1">
+				<br>
+
+				<!-- Item Currency Cost -->
+				<label>Cost (Currency): </label>
+				<input type="number" name="balCost" value="<%=item.balCost%>" min="0">
+				<br>
+
+				<!-- Will it cost other items? -->
+				<label>Does it cost other items?</label>
+				<% if(item.costsItems) { %>
+					<input type="radio" name="costsItems" value="true" checked>Yes
+					<input type="radio" name="costsItems" value="false">No
+				<% }
+				else { %>
+					<input type="radio" name="costsItems" value="true">Yes
+					<input type="radio" name="costsItems" value="false" checked>No
+				<% } %>
+				<hr>
+				<p>Item Costs</p>
+				<% var i=1;
+				if(item.costsItems && itemCosts !== null) {
+					itemCosts.forEach(function(costItem) { %>
+						<label>Item Cost (#<%=i%>): </label>
+						<select name="costIDs">
+							<option value="0">None</option>
+						<% allItems.forEach(function(listItem){ 
+							if(listItem.itemID === costItem.costID) { %>
+							<option value="<%=listItem.itemID%>" selected><%=listItem.name%></option>
+							<% }
+							else { %>
+							<option value="<%=listItem.itemID%>"><%=listItem.name%></option>
+							<% }
+						}); %>
+						</select>
+						<label>Quantity (#<%=i%>): </label>
+						<input type="number" name="costQuantities" value="<%=costItem.quantity%>" min="0">
+						<br>
+					<% i++;
+					});
+				}
+				while (i<=8) { %>
+					<label>Item Cost(#<%=i%>)</label>
+					<select name="costIDs">
+						<option value="0">None</option>
+					<% allItems.forEach(function(listItem){ %>
+						<option value="<%listItem.itemID%>"><%=listItem.name%></option>
+					<% }); %>
+					</select>
+					<label>Quantity (#<%=i%>): </label>
+					<input type="number" name="costQuantities" value="0" min="0">
+					<br>
+				<% i++;
+				}; %>
+
+			</div>
+		</form>
+		<div>
+			<p><a href="/shop">Click here</a> to return to the shop.</p>
+			<p><a href="/">Click here</a> to return to the index page.</p>
+		</div>
+	</body>
