@@ -7,8 +7,13 @@
 	</head>
 	<body>
 		<h1>Now Editing <%=item.name%>(Stock ID#<%=item.stockID%>)</h1>
+	<% if(msg) { %>
+		<p><%=msg%></p>
+	<% } %>
 		<form action="/editShopItem" METHOD="POST">
 			<div>
+				<input type="hidden" name="stockID" value="<%=item.stockID%>" readonly>
+				<input type="hidden" name="itemID" value="<%=item.itemID%>" readonly>
 				<!--Item Stock -->
 				<label>Stock: </label>
 				<input type="number" name="quantity" value="<%=item.quantity%>" min="-1">
@@ -24,6 +29,7 @@
 				<% if(item.costsItems) { %>
 					<input type="radio" name="costsItems" value="true" checked>Yes
 					<input type="radio" name="costsItems" value="false">No
+					<br><em>Note: Selecting "No" and submitting changes will erase this item's item costs from the database.</em>
 				<% }
 				else { %>
 					<input type="radio" name="costsItems" value="true">Yes
@@ -65,7 +71,7 @@
 					<br>
 				<% i++;
 				}; %>
-
+				<input type="submit" value="Submit Changes">
 			</div>
 		</form>
 		<div>
