@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/barter.css">
 	</head>
 	<body>
-		<h1>Now Editing <%=item.name%>(Stock ID#<%=item.stockID%>)</h1>
+		<h1>Now Editing <%=item.name%> (Stock ID#<%=item.stockID%>)</h1>
 	<% if(msg) { %>
 		<p><%=msg%></p>
 	<% } %>
@@ -59,11 +59,11 @@
 					});
 				}
 				while (i<=8) { %>
-					<label>Item Cost(#<%=i%>)</label>
+					<label>Item Cost(#<%=i%>): </label>
 					<select name="costIDs">
 						<option value="0">None</option>
 					<% allItems.forEach(function(listItem){ %>
-						<option value="<%listItem.itemID%>"><%=listItem.name%></option>
+						<option value="<%=listItem.itemID%>"><%=listItem.name%></option>
 					<% }); %>
 					</select>
 					<label>Quantity (#<%=i%>): </label>
