@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Removing Shop Item - barter</title>
+		<link rel="stylesheet" type="text/css" href="css/barter.css">
+	</head>
+	<body>
+		<form action="/removeFromShop" METHOD="POST">
+			<div>
+				<input type="hidden" name="stockID" value="<%=item.stockID%>" readonly>
+				<input type="hidden" name="itemID" value="<%=item.itemID%>" readonly>
+				<table>
+					<thead>
+						<tr>
+							<th><!-- Image Placeholder --></th>
+							<th>Item</th>
+							<th>Description</th>
+							<th>In Stock</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th><img src="/images/<%=item.img%>"></th>
+							<th><%=item.name%></th>
+							<th><%=item.desc%></th>
+							<th><%=item.quantity%></th>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<p>Are you sure you want to remove this item from the shop?</p>
+					<input type="submit" value="Yes, Remove It"> 
+					<a href="/editShopItem?stockID=<%=item.stockID%>"><button type="button">No, Leave It</button></a>
+				</div>
+			</div>
+		</form>
+		<div>
+			<p><a href="/editShopItem?stockID=<%=item.stockID%>">Click here</a> to return to editing this item.</p>
+			<p><a href="/shop">Click here</a> to go to the shop.</p>
+			<p><a href="/">Click here</a> to go to the index page.</p>
+	</body>
+</html>

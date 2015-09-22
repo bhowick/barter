@@ -7,6 +7,7 @@
 	</head>
 	<body>
 		<h1>Now Editing <%=item.name%> (Stock ID#<%=item.stockID%>)</h1>
+		<strong><%=item.name%></strong> <a href="/removeFromShop?stockID=<%=item.stockID%>"><button type"button">Remove This Item</button></a>
 	<% if(msg) { %>
 		<p><%=msg%></p>
 	<% } %>
